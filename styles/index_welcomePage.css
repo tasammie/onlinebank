@@ -1,0 +1,45 @@
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  
+  .welcome-page {
+    background-image: url(https://img.freepik.com/premium-photo/modern-glass-curtain-wall-construction-local-neat-background-picture_1359-2287.jpg?w=360); 
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .welcome-content {
+    text-align: center;
+    color: #fff;
+  }
+  
+  .welcome-content h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+  
+  .welcome-content p {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+  
+  .welcome-content a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  
+  .welcome-content a:hover {
+    background-color: #0056b3;
+  }
