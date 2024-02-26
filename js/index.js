@@ -64,6 +64,7 @@ onAuthStateChanged(auth, async (user) => {
     if (!querySnapshot.empty) {
       const docSnapshot = querySnapshot.docs[0];
       const data = docSnapshot.data();
+      console.log(data);
       try {
         userDetails.innerHTML = data.firstName + " " + data.lastName
       } catch (error) {

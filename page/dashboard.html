@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
     <link rel="stylesheet" href="../../styles/dashboard/dashboard.css" />
+    <!-- <link rel="stylesheet" href="../styles/dashboard/userProfile.css"> -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -39,17 +40,45 @@
       <button class="cancel-btn">
         <i class="far fa-times-circle"></i>
       </button>
+      <div class="profile-image">
+        <!-- <i class="fa-solid fa-user"></i> -->
+      </div>
       <ul>
-        <li><a href="#" class="sidebar-link">Home</a></li>
-        <li><a href="#" class="sidebar-link">About</a></li>
-        <li><a href="#" class="sidebar-link">Services</a></li>
-        <li><a href="#" class="sidebar-link">Contact</a></li>
+        <li><a href="#" class="sidebar-link">Edit Profile</a></li>
+        <li><a href="#" class="sidebar-link">Send Money</a></li>
+        <li><a href="#" class="sidebar-link">Receive Money</a></li>
+        <li><a href="#" class="sidebar-link">Transaction History</a></li>
+        <li><a href="#" class="sidebar-link">Withdraw/Deposit</a></li>
+        <li><a href="#" class="sidebar-link">Others</a></li>
       </ul>
+      <div class="logout">
+          <li><a href="#">Logout</a></li>
+      </div>
+          <!-- <div class="profile-container">
+    <div class="profile-header">
+      <h1>User Profile</h1>
+    </div>
+    <div class="profile-content">
+      <div class="profile-picture">
+        <img src="profile-picture.jpg" alt="Profile Picture">
+      </div>
+      <div class="profile-details">
+        <h2>John Doe</h2>
+        <p>Email: john@example.com</p>
+        <p>Phone: 123-456-7890</p>
+        <p>Address: 123 Main Street, City, Country</p>
+        <button>Edit Profile</button>
+      </div>
+    </div>
+  </div> -->
     </aside>
 
     <div class="content">
       <header>
-        <h1>Online Banking Dashboard</h1>
+        <!-- <h1>Online Banking Dashboard</h1> -->
+        <h1>Welcome <span id="userDetails"></span> </h1>
+
+       
       </header>
       <main>
         <section class="account-summary">
@@ -58,7 +87,7 @@
             <h3>Total Balance</h3>
             <p>$10,000</p>
           </div>
-          <div class="show">
+          <div class="Account_Number" id="show">
             <h3>Account Number</h3>
             <p></p>
           </div>
@@ -140,5 +169,6 @@
 
     <script type="module" src="../../js/dashBoard.js"></script>
     <script type="module" src="../js/index.js"></script>
+
   </body>
 </html>

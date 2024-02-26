@@ -86,21 +86,55 @@ ul {
 
 .sidebar.active {
   left: 0;
+  
 }
 
 .sidebar ul {
   list-style-type: none;
   padding: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  transform: translateY(10%);
+  /* margin-top: 40px; */
 }
 
 .sidebar ul li {
   margin-bottom: 10px;
+  padding: 10px;
 }
 
 .sidebar ul li a {
   color: #fff;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 18px;
+ 
+}
+.logout li {
+  font-size: 18px;
+  text-decoration: none;
+  margin-top: 70px;
+  list-style-type: none;
+
+}
+.logout li a{
+ text-decoration: none;
+ color: red;
+ 
+}
+.profile-image{
+  border: 2px solid;
+  border-radius: 100%;
+  height: 100px;
+  width: 100px;
+  background-image: url(https://img.freepik.com/premium-photo/round-user-icon-isolated-white-background-black-white-3d-rendering_63135-3893.jpg?size=626&ext=jpg&ga=GA1.2.1036705885.1689248252&semt=ais);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  transform: translate(50%);
+  margin-top: 20px;
+  /* font-size: 60px; */
 }
 
 /* Content Area */
@@ -241,4 +275,83 @@ footer {
   color: #fff;
   text-align: center;
   padding: 10px 0;
+}
+
+
+/* profile */
+
+.profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* border: 2px solid red; */
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-header h1 {
+  font-size: 32px;
+  color: #333;
+  
+}
+
+.profile-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.profile-picture {
+  flex-shrink: 0;
+  margin-right: 20px;
+ 
+
+}
+
+.profile-picture img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  
+
+}
+
+.profile-details {
+  flex-grow: 1;
+  
+
+}
+
+.profile-details h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+
+}
+
+.profile-details p {
+  font-size: 16px;
+  color: #666;
+  margin: 5px 0;
+}
+
+.profile-details button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.profile-details button:hover {
+  background-color: #0056b3;
 }

@@ -7,39 +7,76 @@
       query,
       where
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-    const colRef = collection(db, "Account");
+    // const colRef = collection(db, "Account");
 
-    let AllBlogs = []
-    async function getAllDataFromDB(){
-        AllBlogs = []
-        const res = await getDocs(colRef)
-        console.log(res)
-        res.forEach((item)=>{
+    // let ALLDetails = []
+    // async function getAllDataFromDB(){
+    //   ALLDetails = []
+    //     const res = await getDocs(colRef)
+    //     console.log(res)
+    //     res.forEach((info)=>{
             
-            AllBlogs.push({...item.data(), id: item.id})
-        })
-        displayDataOnUi(AllBlogs)
-        blogID = updateForm.blogs.value;
+    //       ALLDetails.push({...info.data(), id: info.id})
+    //     })
+    //     displayDataOnUi(ALLDetails)
 
 
-    }
+    // }
 
-    getAllDataFromDB()
-    let blogID = ""
+    // getAllDataFromDB()
+    // // let blogID = ""
 
-    function displayDataOnUi(data){
-        show.innerHTML = ''
-        console.log(data);
-        data.forEach((item)=>{
-            show.innerHTML +=`
-                <div>
-                    <h1>${item.title}</h1>    
-                    <p>${item.author}</p>
-                </div>
-            `
-          })
-          getAllBtns()
-    }
+    // function displayDataOnUi(data){
+    //     show.innerHTML = ''
+    //     console.log(data);
+    //     data.forEach((info)=>{
+    //         show.innerHTML +=`
+    //             <div>
+    //                 <h1>${info.accountNumber}</h1>    
+    //                 <p>${info.ref}</p>
+    //                 <p>${info.balance}</p>
+    //             </div>
+    //         `
+    //       })
+
+    // }
+
+
+    const colRef = collection(db, "Account");
+  
+let ALLDetails = [];
+
+async function getAllDataFromDB() {
+  ALLDetails = [];
+  const user = auth.currentUser;
+  if (user) {
+    const userId = user.uid;
+    const q = query(colRef, where("userId", "==", userId));
+    const res = await getDocs(q);
+    res.forEach((doc) => {
+      ALLDetails.push({ ...doc.data(), id: doc.id });
+    });
+    displayDataOnUi(ALLDetails);
+  } else {
+    console.log("No user is currently signed in.");
+  }
+}
+
+getAllDataFromDB();
+
+function displayDataOnUi(data) {
+  const show = document.getElementById("show");
+  show.innerHTML = '';
+  data.forEach((info) => {
+    show.innerHTML += `
+      <div>
+        <h1>${info.accountNumber}</h1>    
+        <p>${info.ref}</p>
+        <p>${info.balance}</p>
+      </div>
+    `;
+  });
+}
 
 
 
