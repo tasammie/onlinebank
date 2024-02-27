@@ -76,12 +76,13 @@ ul {
 .sidebar {
   width: 250px;
   height: 100%;
-  background-color: #222;
+  background-color: #1d1c1c;
   color: #fff;
   position: fixed;
   top: 0;
   left: -250px;
   transition: left 0.3s ease;
+ 
 }
 
 .sidebar.active {
@@ -110,17 +111,15 @@ ul {
   font-size: 18px;
  
 }
-.logout li {
+#logout{
   font-size: 18px;
-  text-decoration: none;
-  margin-top: 70px;
-  list-style-type: none;
-
-}
-.logout li a{
- text-decoration: none;
- color: red;
- 
+  margin-top: 40px;
+  background-color: red;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin-left: 15px;
+  border-radius: 5px;
 }
 .profile-image{
   border: 2px solid;
