@@ -47,7 +47,7 @@
       </div>
       <ul>
         <li><a href="#" class="sidebar-link">Edit Profile</a></li>
-        <li><a href="#" class="sidebar-link">Send Money</a></li>
+        <li><a href="./dashboard/sendMoney.html" class="sidebar-link">Send Money</a></li>
         <li><a href="#" class="sidebar-link">Receive Money</a></li>
         <li><a href="#" class="sidebar-link">Transaction History</a></li>
         <li><a href="#" class="sidebar-link">Withdraw/Deposit</a></li>
@@ -93,13 +93,14 @@
           <h2>Account Management</h2>
           <div class="grid-container">
             <div class="grid-item">
-              <a href="#">Send Money</a>
+              <a href="./dashboard/sendMoney.html">Send Money</a>
             </div>
             <div class="grid-item">
               <a href="#">Withdraw/Deposit</a>
             </div>
             <div class="grid-item">
-              <a href="#">Fund Account</a>
+              <p id="openModalBtn">Fund Account</p>
+              <!-- <p id="fundAccBtn">Fund Account</p> -->
             </div>
             <div class="grid-item">
               <a href="#">Transaction History</a>
@@ -118,6 +119,24 @@
             </div>
           </div>
         </section>
+
+        <!-- <form id="fundAccount" >
+          <input type="number" id="amount" placeholder="Amount to fund" required>
+          <button type="submit">Enter</button>
+        </form> -->
+        <!-- <button id="openModalBtn">Open Modal</button> -->
+
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <span class="close" id="closeModalBtn">&times;</span>
+            <h2>Fund Transfer</h2>
+            <form id="fundTransferForm">
+              <input type="number" id="amount" placeholder="Amount to Transfer" required>
+              <button type="submit">Transfer Funds</button>
+            </form>
+          </div>
+        </div>
+
 
         <section class="recent-transactions">
           <h2>Recent Transactions</h2>

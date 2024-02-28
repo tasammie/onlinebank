@@ -35,7 +35,7 @@ onAuthStateChanged(auth,(user)=>{
     console.log(auth);
     if (user) {
         if (user.email) {
-            // window.location.href = './index.html'
+           
         }
 
     }

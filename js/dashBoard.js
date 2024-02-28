@@ -52,6 +52,18 @@ logout.addEventListener("click", logOutUser);
 
 
 
+  openModalBtn.addEventListener("click", displayFundAccModal);
+      function displayFundAccModal(){
+        myModal.style.display = 'block';
+      
+      }
+
+    closeModalBtn.addEventListener("click", function () {
+        myModal.style.display = "none";
+      });
+
+
+
 // Side bar toggling of the sidebar
 const toggleButton = document.querySelector(".toggle-button");
 // const cancelBtn = document.querySelector(".cancel-btn");
