@@ -8,50 +8,53 @@ import {
   where,
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+import {
+
+  onAuthStateChanged,
+
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
 import { logOutUser } from "./index.js";
 
 const colRef = collection(db, "Account");
 
 let ALLDetails = [];
 
-async function getAllDataFromDB() {
-  ALLDetails = [];
-  const user = auth.currentUser;
-  console.log(user);
-  if (user) {
-    const userId = user.uid;
-    const q = query(colRef, where("userId", "==", userId));
-    const res = await getDocs(q);
-    res.forEach((doc) => {
-      ALLDetails.push({ ...doc.data(), id: doc.id });
-    });
-    displayDataOnUi(ALLDetails);
-  } else {
-    console.log("No user is currently signed in.");
-  }
+
+onAuthStateChanged(auth, async (user) => {
+  // console.log({user});
+  await getCurrentUser(user.email)
+ 
+})
+
+async function getCurrentUser(email){
+ 
+  if (email) {
+    const q = query(colRef, where("ref", "==", email));
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) {
+      console.log('no document with this email');
+     return
+    }
+    querySnapshot.forEach((doc)=>{
+      const data ={ ...doc.data(), id:doc.id}
+      console.log(data);
+      balanceID.innerHTML = `$${data.balance}`
+      accountNumber.innerHTML = `${data.accountNumber}`
+    })
+  } 
 }
 
-getAllDataFromDB();
 
-function displayDataOnUi(data) {
-  const show = document.getElementById("show");
-  show.innerHTML = "";
-  data.forEach((info) => {
-    show.innerHTML += `
-      <div>
-        <h1>${info.accountNumber}</h1>    
-        <p>${info.ref}</p>
-        <p>${info.balance}</p>
-      </div>
-    `;
-  });
-}
 
 logout.addEventListener("click", logOutUser);
+  // window.location.href = '.../index.html';
+
+
 
 // Side bar toggling of the sidebar
 const toggleButton = document.querySelector(".toggle-button");
-const cancelBtn = document.querySelector(".cancel-btn");
+// const cancelBtn = document.querySelector(".cancel-btn");
 const sidebar = document.querySelector(".sidebar");
 const sidebarBg = document.getElementById("sidebar-bg");
 const content = document.querySelector(".content");
@@ -84,7 +87,3 @@ toggleButton.addEventListener("click", function () {
   sidebarBg.style.display = "block";
 });
 
-cancelBtn.addEventListener("click", function () {
-  sidebar.classList.remove("active");
-  sidebarBg.style.display = "none";
-});

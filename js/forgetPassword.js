@@ -3,19 +3,7 @@ import { sendResetEmail } from "./index.js";
 const openModalBtn = document.getElementById('openModalBtn');
 const modal = document.getElementById('myModal');
 const closeModalBtn = document.getElementsByClassName('close')[0];
-// forgetPasswordForm.addEventListener('submit',async(e) =>{
-//     e.preventDefault()
-//     const email = forgetPasswordForm.email.value;
-//     console.log(email);
-    
-//     try {
-//         sendResetEmail(email)
-//     // const res = await sendPasswordResetEmail(auth, email)    
-//     } catch (error) {
-//     console.log(error);
-//     }
 
-// })
 
 openModalBtn.addEventListener('click', () => {
   modal.style.display = 'block';

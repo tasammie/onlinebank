@@ -20,11 +20,12 @@ async function addDataToDatabase(e){
     const res = await addDoc(colRef, { firstName, lastName, email,phone,password })
 
     const AccountNumberGenerator = Math.floor(Math.random() * 9836484939)
-    const resAc = await addDoc(colAccRef,{balance: 0, ref: email, accountNumber: AccountNumberGenerator  })
+    const resAc = await addDoc(colAccRef,{balance: 100, ref: email, accountNumber: AccountNumberGenerator  })
+
+    window.location.href = '../page/dashboard.html';
 
     console.log(res);
     console.log(res.Acc, 'bank account created for ' + firstName + ' ' + lastName);
-    // getAllDataFromDB()
    } catch (error) {
     console.log(error);
    }

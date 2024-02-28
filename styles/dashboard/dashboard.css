@@ -111,6 +111,20 @@ ul {
   font-size: 18px;
  
 }
+
+#sidebar-bg {
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  display: none;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+#toggleButton {
+  position: relative;
+  z-index: 10;
+}
+
 #logout{
   font-size: 18px;
   margin-top: 40px;

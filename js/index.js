@@ -56,48 +56,29 @@ export const sendResetEmail = async (email) => {
 };
 export const logOutUser = async (email) => {
   signOut(auth, email);
-  console.log("Logout successful!");
+  console.log("User successful Logout!");
+  window.location.href = '../index.html';
+
+
   // localStorage.removeItem("user");
 };
 
 onAuthStateChanged(auth, async (user) => {
-  userDetails.innerHTML = "";
   if (user) {
-    const q = query(colRef, where("email", "==", user?.email));
+    const q = query(colRef, where("email", "==", user.email));
     const querySnapshot = await getDocs(q);
-    console.log(querySnapshot.empty)
+
     if (!querySnapshot.empty) {
       const docSnapshot = querySnapshot.docs[0];
       const data = docSnapshot.data();
-      console.log(data)
+      console.log(data);
       try {
         userDetails.innerHTML = data.firstName + " " + data.lastName;
       } catch (error) {
         return;
       }
     } else {
-      userDetails.innerHTML = "";
       console.log("No user found with the email:", user.email);
     }
   }
 });
-
-// onAuthStateChanged(auth, async (user) => {
-//   if (user) {
-//     const q = query(colRef, where("email", "==", user.email));
-//     const querySnapshot = await getDocs(q);
-
-//     if (!querySnapshot.empty) {
-//       const docSnapshot = querySnapshot.docs[0];
-//       const data = docSnapshot.data();
-//       console.log(data);
-//       try {
-//         userDetails.innerHTML = data.firstName + " " + data.lastName
-//       } catch (error) {
-//         return
-//       }
-//     } else {
-//       console.log("No user found with the email:", user.email);
-//     }
-//   }
-// });
