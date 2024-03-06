@@ -1,47 +1,62 @@
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bank Sqi</title>
-    <link rel="stylesheet" href="../styles/loginPage.css">
-    <link rel="stylesheet" href="../styles/forgetPassword.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Set Up Your Password</title>
+  <link rel="stylesheet" href="../styles/loginPage.css" />
+  <link rel="stylesheet" href="../styles/forgetPassword.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
 </head>
-<body>
-    <div class="auth-container">
-        <h2>Welcome to Bank Sqi App</h2>
-        <form name="toLogInUser" id="formData">
-          <div class="input-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-          </div>
-          <div class="input-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-          </div>
-          <button type="submit" >Login</button>
-          <div class="links">
-            <!-- <a href="./page/forgetPassword.html">Forgot Password?</a> -->
-            <button id="openModalBtn">Forgot Password?</button>
-            <span>Don't have an account? <a href="../auth/signup.html">Register</a></span>
-          </div>
-        </form>
-      </div>
 
-      <div id="myModal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <h2>Forget Password</h2>
-          <form id="forgetPasswordForm" action="#" method="post">
-            <label for="email">Enter your email:</label>
-            <input type="email" name="email" placeholder="Your email.." required>
-            <input type="submit" value="Submit">
+<body>
+  <div class="container-fluid bg-custom">
+    <div class="row login-container align-items-center">
+      <div class="col-md-6 text-center text-md-start p-5">
+        <h1 class="login-header">The Power of Financial Freedom</h1>
+        <h2 class="login-subheader">Set Up Your Password</h2>
+        <p class="login-text">
+          Your security is our top priority. You'll need this to log into your
+          bankio account
+        </p>
+        <div class="login-form mx-auto mx-md-0">
+          <form name="toLogInUser" id="formData">
+            <div class="mb-4">
+              <label for="email" class="form-label">Enter Your Email Address</label>
+              <input type="email" class="form-control" id="email" placeholder="Your email Address here" />
+            </div>
+            <div class="mb-4">
+              <label for="password" class="form-label">Confirm Password</label>
+              <input type="password" class="form-control" id="password" placeholder="Enter Your Password" />
+            </div>
+            <button type="submit" class="btn btn-custom w-100">Login</button>
+            <a href="./page/forgetPassword.html" class="forgot-password">Forgot Password?</a>
+            <span>Don't have an account?
+              <a href="../auth/signup.html">Register</a></span>
           </form>
         </div>
       </div>
-    
-    
+      <div class="col-md-6 image-container"></div>
+    </div>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Forget Password</h2>
+        <form id="forgetPasswordForm" action="#" method="post">
+          <label for="email">Enter your email:</label>
+          <input type="email" name="email" placeholder="Your email.." required />
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+    </div> 
+  </div>
+
+  <!-- /////OLD VERSION ///////OLD VERSION -->
+  
 </body>
 <script type="module" src="../js/index.js"></script>
 <script type="module" src="../js/loginPage.js"></script>
 <script type="module" src="../js/forgetPassword.js"></script>
+
 </html>
