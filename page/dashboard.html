@@ -11,7 +11,7 @@
     />
   </head>
   <body class="tryit position-relative">
-    <nav class="navbar">
+    <!-- <nav class="navbar">
       <div class="navbar-container">
         <div class="navbar-brand">
           <h1>Logo</h1>
@@ -19,22 +19,15 @@
         <div class="google-search-container">
           <input type="text" placeholder="Search transaction">
           <button type="submit">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
           </button>
         </div>
-        <!-- <div class="Navbar-details">
-          <ul>
-            <li><a href="#"></a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-          </ul>
-        </div> -->
+       
         <button class="toggle-button" id="toggleButton">
           <i class="fas fa-bars"></i>
         </button>
       </div>
-    </nav>
+    </nav> -->
 
     <div id="sidebar-bg"></div>
 
@@ -68,7 +61,7 @@
       </header>
       <main>
         <section class="account-summary">
-          <h2>Account Summary</h2>
+          <!-- <h2>Account Summary</h2> -->
           <div class="total-balance">
             <h3>Total Balance</h3>
             <p id="balanceID"></p>
@@ -76,6 +69,10 @@
           <div class="Account_Number" id="show">
             <h3>Account Number</h3>
             <p id="accountNumber"></p>
+          </div>
+          <div class="Account_Type" id="show">
+            <h3>Savings Account</h3>
+            <!-- <p id="accountNumber"></p> -->
           </div>
           <!-- <div class="individual-balances">
             <div class="account">
@@ -93,10 +90,7 @@
           <h2>Account Management</h2>
           <div class="grid-container">
             <div class="grid-item">
-              <a href="./dashboard/sendMoney.html">Send Money</a>
-            </div>
-            <div class="grid-item">
-              <a href="#">Withdraw/Deposit</a>
+              <a href="./dashboard/sendMoney.html">Transfer Fund</a>
             </div>
             <div class="grid-item">
               <p id="openModalBtn">Fund Account</p>
@@ -120,6 +114,8 @@
           </div>
         </section>
 
+        <input type="text" placeholder="Search" id="searchInput" oninput="toSearch()" />
+
     
 
         <div id="myModal" class="modal">
@@ -136,24 +132,20 @@
 
         <section class="recent-transactions">
           <h2>Recent Transactions</h2>
-          <ul>
-            <li>
-              <p>Jan 20, 2024 - Grocery shopping</p>
-              <p>$100.00</p>
-            </li>
-            <!-- Add more transactions as needed -->
-          </ul>
+          <table class="transaction-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody id="transactionTableBody">
+              <!-- Transaction rows will be dynamically added here -->
+            </tbody>
+          </table>
         </section>
-
-        <section class="alerts-notifications">
-          <h2>Alerts and Notifications</h2>
-          <div class="alert">
-            <p>
-              Your checking account balance is low. Consider transferring funds.
-            </p>
-          </div>
-          <!-- Add more alerts and notifications as needed -->
-        </section>
+        
 
       
       </main>

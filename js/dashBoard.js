@@ -21,7 +21,10 @@ let ALLDetails = [];
 onAuthStateChanged(auth, async (user) => {
   // console.log({user});
   if (user) {
-    currentUser = user
+    currentUser = user;
+    // Call the function to populate the transaction table
+    populateTransactionTable();
+
   }
   await getCurrentUser(user.email);
 });
@@ -46,7 +49,6 @@ async function getCurrentUser(email) {
 logout.addEventListener("click", logOutUser);
 // window.location.href = '.../index.html';
 
-
 // Modal function
 
 openModalBtn.addEventListener("click", displayFundAccModal);
@@ -60,15 +62,17 @@ closeModalBtn.addEventListener("click", function () {
 
 // fund user account
 
-fundAccountForm.addEventListener("submit", async function(e) {
+fundAccountForm.addEventListener("submit", async function (e) {
   e.preventDefault();
-  
+
   // Parse amount to number
   const amount = parseFloat(fundAccountForm.amount.value);
 
   try {
     // Query Firestore to find the document with the user's account
-    const querySnapshot = await getDocs(query(colRef, where("ref", "==", currentUser.email)));
+    const querySnapshot = await getDocs(
+      query(colRef, where("ref", "==", currentUser.email))
+    );
 
     // Iterate through each document in the query result
     querySnapshot.forEach(async (account) => {
@@ -100,6 +104,47 @@ fundAccountForm.addEventListener("submit", async function(e) {
   }
 });
 
+// transaction history
+
+
+
+
+// Function to populate the transaction table
+async function populateTransactionTable() {
+  const transactionTableBody = document.getElementById("transactionTableBody");
+  
+  // Clear any existing rows
+  transactionTableBody.innerHTML = "";
+  const trancColRef = collection(db, 'Transactions')
+  const transactions = await getDocs(query(trancColRef, where('senderEmail','==', currentUser.email)));
+  if (transactions.empty) {
+    const row = `
+      <tr>
+        <td colspan="3">No records found</td>
+      </tr>
+    `;
+    // Append the row to the table body
+    transactionTableBody.innerHTML += row;
+    return
+  }
+  // Iterate through the transactions array and create table rows
+  transactions.forEach((transaction) => {
+    const actualTransactionData = transaction.data()
+    console.log(actualTransactionData);
+    const row = `
+      <tr>
+        <td>${actualTransactionData.transactionDate}</td>
+        <td>${actualTransactionData.remark}</td>
+        <td>${actualTransactionData.amount}</td>
+      </tr>
+    `;
+
+    // Append the row to the table body
+    transactionTableBody.innerHTML += row;
+  });
+}
+
+
 
 
 
@@ -115,28 +160,41 @@ const content = document.querySelector(".content");
 const toggleBtn = document.getElementById("toggleButton");
 const sidebarLinks = document.querySelectorAll(".sidebar-Link");
 
-toggleBtn.addEventListener("click", function () {
-  if (toggleBtn.firstElementChild.classList.contains("fa-bars")) {
-    toggleBtn.firstElementChild.classList.remove("fa-bars");
-    toggleBtn.firstElementChild.classList.add("fa-times");
-  } else {
+try {
+  toggleBtn.addEventListener("click", function () {
+    if (toggleBtn.firstElementChild.classList.contains("fa-bars")) {
+      toggleBtn.firstElementChild.classList.remove("fa-bars");
+      toggleBtn.firstElementChild.classList.add("fa-times");
+    } else {
+      toggleBtn.firstElementChild.classList.remove("fa-times");
+      toggleBtn.firstElementChild.classList.add("fa-bars");
+    }
+  });
+  
+} catch (error) {
+console.log(error);  
+}
+try {
+  sidebarBg.addEventListener("click", function () {
+    sidebar.classList.remove("active");
+    sidebarBg.style.display = "none";
     toggleBtn.firstElementChild.classList.remove("fa-times");
     toggleBtn.firstElementChild.classList.add("fa-bars");
-  }
-});
-
-sidebarBg.addEventListener("click", function () {
-  sidebar.classList.remove("active");
-  sidebarBg.style.display = "none";
-  toggleBtn.firstElementChild.classList.remove("fa-times");
-  toggleBtn.firstElementChild.classList.add("fa-bars");
-});
-
-toggleButton.addEventListener("click", function () {
-  sidebar.classList.toggle("active");
-  if (sidebarBg.style.display == "block") {
-    sidebarBg.style.display = "none";
-    return;
-  }
-  sidebarBg.style.display = "block";
-});
+  });
+    
+} catch (error) {
+  console.log(error);
+}
+try {
+  toggleButton.addEventListener("click", function () {
+    sidebar.classList.toggle("active");
+    if (sidebarBg.style.display == "block") {
+      sidebarBg.style.display = "none";
+      return;
+    }
+    sidebarBg.style.display = "block";
+  });
+  
+} catch (error) {
+console.log(error);  
+}

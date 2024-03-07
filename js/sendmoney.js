@@ -9,6 +9,7 @@ import {
   query,
   where,
   updateDoc,
+  addDoc
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import {
   getAuth,
@@ -29,6 +30,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 const colRef = collection(db, "Account");
+const userColRef= collection(db, "users");
 
 // const user = auth.currentUser;
 sendMoneyForm.addEventListener("submit", function (e) {
@@ -79,7 +81,30 @@ async function transferMoney(receiverAccountNumber, amount, notes) {
                   balance: receiverNewBalance,
                 });
                 console.log("Transaction was successful");
+                const transactioncolRef = collection(db, 'Transactions')
+                const senderSnapshot = await getDocs(query(userColRef, where('email', '==', auth.currentUser.email)))
+                let senderName;
+                let senderEmail;
+                senderSnapshot.forEach((senderAcc)=>{
+                  senderEmail = senderAcc.data().email
+                   senderName = senderAcc.data().firstName + ' ' + senderAcc.data().lastName
+                })
+                const receiverSnapshot = await getDocs(query(userColRef, where('email', '==', receiverAccount.data().ref)))
+                let receiverName;
+                receiverSnapshot.forEach((receiverAcc)=>{
+                  receiverName = receiverAcc.data().firstName + ' ' + receiverAcc.data().lastName
+                })
+                const transaction = {
+                  sender: senderName,
+                  senderEmail,
+                  receiver: receiverName,
+                  amount,
+                  remark: notes,
+                  transactionDate: new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString()
+                }
+                const transactionSnapshot = await addDoc(transactioncolRef, transaction)
                 alert("Transaction was successful");
+
               } catch (error) {
                 console.error("Error updating receiver document:", error);
               }
