@@ -100,6 +100,7 @@ async function transferMoney(receiverAccountNumber, amount, notes) {
                   receiver: receiverName,
                   amount,
                   remark: notes,
+                  
                   transactionDate: new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString()
                 }
                 const transactionSnapshot = await addDoc(transactioncolRef, transaction)

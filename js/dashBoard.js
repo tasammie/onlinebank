@@ -18,16 +18,31 @@ let currentUser;
 
 let ALLDetails = [];
 
+// onAuthStateChanged(auth, async (user) => {
+//   // console.log({user});
+//   if (user) {
+//     currentUser = user;
+//     // Call the function to populate the transaction table
+//     populateTransactionTable();
+
+//   }
+//   await getCurrentUser(user.email);
+// });
+
+// Update the onAuthStateChanged function
 onAuthStateChanged(auth, async (user) => {
-  // console.log({user});
   if (user) {
     currentUser = user;
     // Call the function to populate the transaction table
     populateTransactionTable();
-
+    // Call the function to display the profile image
+    displayProfileImage(user.email);
   }
   await getCurrentUser(user.email);
 });
+
+
+
 
 async function getCurrentUser(email) {
   if (email) {
@@ -45,6 +60,27 @@ async function getCurrentUser(email) {
     });
   }
 }
+
+async function displayProfileImage(email) {
+  const q = query(colRef, where("ref", "==", email));
+  const querySnapshot = await getDocs(q);
+
+  if (!querySnapshot.empty) {
+    const docSnapshot = querySnapshot.docs[0];
+    const data = docSnapshot.data();
+    
+    // Check if the user has a profile image URL
+    if (data.profileImageURL) {
+      const profileImageContainer = document.querySelector('.profile-image');
+      // Set the background image of the profile image container
+      profileImageContainer.style.backgroundImage = `url('${data.profileImageURL}')`;
+    }
+  }
+}
+
+
+
+
 
 logout.addEventListener("click", logOutUser);
 // window.location.href = '.../index.html';
@@ -106,10 +142,6 @@ fundAccountForm.addEventListener("submit", async function (e) {
 
 // transaction history
 
-
-
-
-// Function to populate the transaction table
 async function populateTransactionTable() {
   const transactionTableBody = document.getElementById("transactionTableBody");
   
@@ -123,11 +155,11 @@ async function populateTransactionTable() {
         <td colspan="3">No records found</td>
       </tr>
     `;
-    // Append the row to the table body
+   
     transactionTableBody.innerHTML += row;
     return
   }
-  // Iterate through the transactions array and create table rows
+  
   transactions.forEach((transaction) => {
     const actualTransactionData = transaction.data()
     console.log(actualTransactionData);
@@ -136,13 +168,15 @@ async function populateTransactionTable() {
         <td>${actualTransactionData.transactionDate}</td>
         <td>${actualTransactionData.remark}</td>
         <td>${actualTransactionData.amount}</td>
+        <td>${actualTransactionData.receiver}</td>
+        <td>${actualTransactionData.type}</td>
       </tr>
     `;
-
-    // Append the row to the table body
     transactionTableBody.innerHTML += row;
   });
 }
+
+
 
 
 

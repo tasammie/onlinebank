@@ -18,6 +18,9 @@ import {
   sendPasswordResetEmail,
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
+import { getStorage } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyAxb9Oq5YaA5V2c87kfltG-WcD4d31TJHE",
   authDomain: "bank-app-56367.firebaseapp.com",
@@ -62,6 +65,8 @@ export const logOutUser = async (email) => {
 
   // localStorage.removeItem("user");
 };
+
+export const storage = getStorage(app); 
 
 onAuthStateChanged(auth, async (user) => {
   if (user) {
