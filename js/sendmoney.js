@@ -42,6 +42,27 @@ sendMoneyForm.addEventListener("submit", function (e) {
   const notes = sendMoneyForm.notes.value;
   transferMoney(receiverAccountNumber, amount, notes);
 });
+async function getCurrentUserAccountNumber(email) {
+  try {
+    if (email) {
+      const q = query(colRef, where("ref", "==", email));
+      const querySnapshot = await getDocs(q);
+      if (querySnapshot.empty) {
+        console.log("no document with this email");
+        return 'No document with this email';
+      }
+      let accountNumber;
+      querySnapshot.forEach((doc) => {
+        const data = { ...doc.data(), id: doc.id };
+        accountNumber = data.accountNumber;
+      });
+      return accountNumber  
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 
 async function transferMoney(receiverAccountNumber, amount, notes) {
   try {
@@ -49,13 +70,16 @@ async function transferMoney(receiverAccountNumber, amount, notes) {
     const senderQuerySnapshot = await getDocs(
       query(colRef, where("ref", "==", auth.currentUser.email))
     );
-
+    const senderAccNo = await getCurrentUserAccountNumber(auth.currentUser.email)
+    if (+senderAccNo === +receiverAccountNumber) {
+      alert('Cant send money to yourself');
+      return
+    }
     senderQuerySnapshot.forEach(async (senderAccount) => {
       try {
         console.log("Sender account found:", senderAccount.id);
         const senderDocRef = doc(colRef, senderAccount.id);
         const currentBalance = parseFloat(senderAccount.data().balance);
-
         if (currentBalance >= amount) {
           const newSenderBalance = currentBalance - amount;
           await updateDoc(senderDocRef, { balance: newSenderBalance });
@@ -72,6 +96,7 @@ async function transferMoney(receiverAccountNumber, amount, notes) {
             receiverQuerySnapshot.forEach(async (receiverAccount) => {
               try {
                 const receiverDocRef = doc(colRef, receiverAccount.id);
+                
                 const receiverCurrentBalance = parseFloat(
                   receiverAccount.data().balance
                 );
@@ -91,20 +116,72 @@ async function transferMoney(receiverAccountNumber, amount, notes) {
                 })
                 const receiverSnapshot = await getDocs(query(userColRef, where('email', '==', receiverAccount.data().ref)))
                 let receiverName;
+                let receiverEmail;
                 receiverSnapshot.forEach((receiverAcc)=>{
-                  receiverName = receiverAcc.data().firstName + ' ' + receiverAcc.data().lastName
+                  receiverName = receiverAcc.data().firstName + ' ' + receiverAcc.data().lastName;
+                  receiverEmail = receiverAcc.data().email;
                 })
-                const transaction = {
-                  sender: senderName,
-                  senderEmail,
-                  receiver: receiverName,
-                  amount,
-                  remark: notes,
+                // const transaction = {
+                //   sender: senderName,
+                //   senderEmail,
+                //   receiver: receiverName,
+                //   amount,
+                //   remark: notes,
                   
+                //   transactionDate: new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString()
+                // }
+                // const transactionForDebiter = {
+                //   receiver: receiverName,
+                //   type: 'debit',
+                //   senderEmail,
+                //   amount,
+                //   transactionDate: new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString()
+
+                // }
+
+                // const transactionForCrediter = {
+                //   sender: senderName,
+                //   type: 'credit',
+                //   receiverEmail,
+                //   amount,
+                //   transactionDate: new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString()
+
+                // }
+
+
+                // const transactionSnapshot = await addDoc(transactioncolRef, transaction)
+                // alert("Transaction was successful");
+                console.log(receiverAccount.id, 'receiverAccount.id');
+                const transactionForDebiter = {
+                  receiver: receiverName,
+                  type: 'debit', 
+                  senderEmail,
+                  remark: notes,
+                  amount,
+                  id: senderAccount.id,
                   transactionDate: new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString()
-                }
-                const transactionSnapshot = await addDoc(transactioncolRef, transaction)
+                };
+                
+                const transactionForCrediter = {
+                  sender: senderName,
+                  type: 'credit', 
+                  receiver: receiverName,
+                  remark: notes,
+                  amount,
+                  id: receiverAccount.id,
+                  transactionDate: new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString(),
+                  receiverEmail
+                };
+
+                console.log(senderAccount.data().accountNumber);
+                
+               
+                const transactionSnapshotForDebiter = await addDoc(transactioncolRef, transactionForDebiter);
+                const transactionSnapshotForCrediter = await addDoc(transactioncolRef, transactionForCrediter);
+                
+                console.log(transactionSnapshotForDebiter, 'transactionSnapshotForDebiter');
                 alert("Transaction was successful");
+                
 
               } catch (error) {
                 console.error("Error updating receiver document:", error);

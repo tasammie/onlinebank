@@ -148,8 +148,9 @@ async function populateTransactionTable() {
   // Clear any existing rows
   transactionTableBody.innerHTML = "";
   const trancColRef = collection(db, 'Transactions')
-  const transactions = await getDocs(query(trancColRef, where('senderEmail','==', currentUser.email)));
-  if (transactions.empty) {
+  const debitTransactions = await getDocs(query(trancColRef, where('senderEmail','==', currentUser.email)));
+  const creditTransactions = await getDocs(query(trancColRef, where('receiverEmail','==', currentUser.email)));
+  if (debitTransactions.empty && creditTransactions.empty) {
     const row = `
       <tr>
         <td colspan="3">No records found</td>
@@ -159,21 +160,38 @@ async function populateTransactionTable() {
     transactionTableBody.innerHTML += row;
     return
   }
+
+  const allTransactions = []
   
-  transactions.forEach((transaction) => {
+  debitTransactions.forEach((transaction) => {
     const actualTransactionData = transaction.data()
-    console.log(actualTransactionData);
-    const row = `
-      <tr>
-        <td>${actualTransactionData.transactionDate}</td>
-        <td>${actualTransactionData.remark}</td>
-        <td>${actualTransactionData.amount}</td>
-        <td>${actualTransactionData.receiver}</td>
-        <td>${actualTransactionData.type}</td>
-      </tr>
-    `;
-    transactionTableBody.innerHTML += row;
+    // console.log(actualTransactionData);
+    allTransactions.push(actualTransactionData);
   });
+  creditTransactions.forEach((transaction) => {
+    const actualTransactionData = transaction.data()
+    // console.log(actualTransactionData);
+    allTransactions.push(actualTransactionData);
+  });
+
+  const sortedTransactions = allTransactions.toSorted((transcA, transB)=>{
+    return new Date(transB.transactionDate).getTime() - new Date(transcA.transactionDate).getTime() 
+  })
+
+  sortedTransactions.forEach((transaction)=>{
+    const actualTransactionData = transaction;
+    const row = `
+    <tr style="background-color:${actualTransactionData.type === 'debit' ? 'red' : 'green'}">
+      <td>${actualTransactionData.transactionDate}</td>
+      <td>${actualTransactionData.remark}</td>
+      <td>${actualTransactionData.amount}</td>
+      <td>${actualTransactionData.receiver}</td>
+      <td>${actualTransactionData.type}</td>
+    </tr>
+  `;
+  transactionTableBody.innerHTML += row;
+
+  })
 }
 
 
