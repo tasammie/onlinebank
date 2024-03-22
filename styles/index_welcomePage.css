@@ -3,43 +3,118 @@
     padding: 0;
     box-sizing: border-box;
   }
-  
-  
-  .welcome-page {
-    background-image: url(https://img.freepik.com/premium-photo/modern-glass-curtain-wall-construction-local-neat-background-picture_1359-2287.jpg?w=360); 
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+  body {
+    font-family: "Roboto", sans-serif;
+    background-color: #f8f9fa;
   }
-  
-  .welcome-content {
-    text-align: center;
-    color: #fff;
+
+  .navbar {
+    background-color: #ffffff !important;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1) !important;
   }
-  
-  .welcome-content h1 {
+
+  .navbar-brand {
+    font-weight: 500 !important;
+    color: #007bff !important;
+  }
+
+  .nav-link {
+    color: #212529 !important;
+    margin-right: 15px !important;
+    font-weight: 400!important; 
+  }
+  .nav-link:hover {
+    color: #007bff !important;
+  }
+  .btn-open-account {
+    background-color: #007bff !important;
+    color: #ffffff !important;
+    padding: 10px 25px !important;
+    border-radius: 15px !important;
+    font-weight: 500 !important;
+  }
+
+
+
+  .hero-section {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f0f2f5;
+    padding: 50px 0;
+    margin-top: 40px;
+    /* border: 2px solid red; */
+  }
+
+  .hero-content {
+    padding: 0 15px;
+  }
+
+  .hero-heading {
     font-size: 48px;
-    margin-bottom: 20px;
+    font-weight: 700;
+    color: #0d263b;
+    margin-bottom: 24px;
   }
-  
-  .welcome-content p {
+
+  .hero-subheading {
     font-size: 24px;
-    margin-bottom: 30px;
+    font-weight: 400;
+    color: #495057 !important;
+    margin-bottom: 48px;
   }
-  
-  .welcome-content a {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-right: 10px;
+
+  .btn {
+    border-radius: 20px;
+    padding: 10px 30px;
+    font-size: 18px;
   }
-  
-  .welcome-content a:hover {
+
+  .btn-primary {
     background-color: #0056b3;
+    border: none;
+    text-decoration: none !important;
   }
+
+  .btn-outline-primary {
+    color: #0056b3;
+    background-color: transparent;
+    border-color: #0056b3;
+  }
+
+  .btn:not(:last-child) {
+    margin-right: 15px;
+  }
+
+  .btn:hover {
+    background-color: black !important;
+  }
+
+  .btn-primary a {
+    text-decoration: none;
+    color: white;
+  }
+
+  .btn-open-account a {
+    text-decoration: none;
+    color: white;
+  }
+
+  .hero-image {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Footer */
+  footer {
+    /* background-color: #333; */
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  footer p {
+    margin: 0;
+  }
+  
+  

@@ -2,13 +2,45 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+  transition: 0.5s;
+
 }
 
-body {
-  font-family: 'Open Sans', sans-serif;
+.logo{
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-brand {
+  font-weight: 500 !important;
+  color: #fff !important;
+  font-size: 30px !important;
+  background: black;
+  border-radius: 5px;
+  padding: 20px 25px !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: 0.5s;
+
+}
+
+.navbar-brand:hover {
+  background: #011b33;
+}
+
+#formData{
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 .bg-custom {
-  background: linear-gradient(to right, #ffffff 50%);
+  background-color: #011b33;
+  /* background: linear-gradient(to right, #ffffff 50%); */
 }
 .login-container {
   min-height: 100vh;
@@ -21,27 +53,21 @@ body {
   padding: 1.5rem;
   font-size: 1rem;
 }
-.btn-custom {
+
+#loginBtn{
   background-color: #0056b3 !important;
   color: white !important;
-  border-radius: 0;
+  border-radius: 5px;
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
+  border: none;
+  transition: 0.5s;
 }
-.login-header {
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 2rem;
+
+#loginBtn:hover{
+  background-color: #011b33!important;
 }
-.login-subheader {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 1rem;
-}
-.login-text {
-  margin-bottom: 3rem;
-}
+
 .forgot-password {
   text-decoration: none;
   font-size: 0.9rem;
@@ -49,9 +75,12 @@ body {
   display: block;
   margin-top: 0.5rem;
 }
-.image-container {
-  background-image: url('https://img.freepik.com/premium-photo/close-up-hand-using-mobile-phone_1048944-19269110.jpg?w=900');
-  background-size: cover;
-  background-position: center;
-  height: 60vh;
+.forgot-password:hover{
+  text-decoration: underline;
+  color: black;
 }
+
+.spinner-border{
+font-size: 10px !important;
+}
+
