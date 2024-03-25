@@ -29,8 +29,11 @@
               <label for="password" class="form-label"></label>
               <input type="password" class="form-control" id="password" placeholder="Enter Your Password" />
             </div>
-            <div>
-                 <button type="submit" class="btn btn-custom w-100 " id="loginBtn">Login to your account <span class="spinner-border"></span> </button>
+            <div id="error-message">
+
+            </div>
+            <div class="LoadBtn">
+                 <button type="submit" class="btn btn-custom w-100 " id="loginBtn">Login to your account <span class="spinner-border" id="spinner" hidden></span> </button>
             </div>
             <!-- <button type="submit" class="btn btn-custom w-100 " id="loginBtn">Login to your account</button> -->
             <a href="../auth pages/forgetPassword.html" class="forgot-password">Forgot Password?</a>
