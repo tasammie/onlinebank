@@ -68,3 +68,22 @@ async function toLogin(e) {
 }
 
 toLogInUser.addEventListener('submit', toLogin);
+
+togglePasswordEye.addEventListener('click', togglePasswordVisibility)
+
+function togglePasswordVisibility() {
+    let passwordInput = document.getElementById("password");
+    let eyeIcon = document.querySelector(".eye-icon i");
+  
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      eyeIcon.classList.remove("fa-eye");
+      eyeIcon.classList.add("fa-eye-slash");
+    } else {
+      passwordInput.type = "password";
+      eyeIcon.classList.add("fa-eye");
+      eyeIcon.classList.remove("fa-eye-slash");
+    }
+}
+
+

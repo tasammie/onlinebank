@@ -91,3 +91,17 @@ font-size: 10px !important;
   gap: 40px;
 }
 
+#password-container{
+  position: relative;
+}
+
+.eye-icon {
+  position: absolute;
+  top: 53%;
+  left: 17.4rem;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: red;
+  font-size: 20px;
+}
+

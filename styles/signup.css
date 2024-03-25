@@ -1,8 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
   transition: 0.5s;
 
 }
@@ -15,17 +19,12 @@ body {
 }
 
 .auth-container {
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  /* background-color: #fff; */
-  /* background-color: #fff;
+  width: 40%;
+  margin: 30px auto;
   padding: 20px 20px;
   border-radius: 8px;
- border: 2px solid red;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); */
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);  */
+  background-color: #fff;
 }
 .formData{
   width: 100%;
@@ -39,6 +38,9 @@ body {
 .auth-container h2 {
   text-align: center;
   margin-bottom: 20px;
+  font-size: 15PX;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
 }
 
 .input-group {
@@ -48,6 +50,9 @@ body {
 .input-group label {
   display: block;
   margin-bottom: 5px;
+  font-family: "Roboto", sans-serif;
+  font-size: 17px;
+  font-weight: 300;
 }
 
 .input-group input {
@@ -55,6 +60,18 @@ body {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+#password-container{
+  position: relative;
+}
+
+.eye-icon {
+  position: absolute;
+  top: 50%;
+  left: 10.4rem;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: black;
 }
 
 button {
