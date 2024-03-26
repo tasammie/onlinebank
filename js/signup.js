@@ -21,6 +21,75 @@ import {
 const colRef = collection(db, "users");
 const colAccRef = collection(db, "Account");
 
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+const passwordInp = document.getElementById("password");
+// Regex patterns for each character requirement
+const lowercaseRegex = /(?=.*[a-z])/;
+const uppercaseRegex = /(?=.*[A-Z])/;
+const specialCharRegex = /(?=.*[!@#$%^&*])/;
+const numberRegex = /(?=.*\d)/;
+
+// Regex pattern for minimum length of 8 characters
+const minLengthRegex = /.{8,}/;
+
+const lowercaseEl = document.getElementById("lowercase");
+const uppercaseEl = document.getElementById("uppercaseRegex");
+const specialCharEl = document.getElementById("specialCharRegex");
+const numberEl = document.getElementById("numberRegex");
+const minLengthEl = document.getElementById("minLengthRegex");
+
+const regexItems = document.querySelectorAll("li");
+const passwordInput = document.getElementById("password");
+
+
+const regexArray = [
+  {
+    name: "lowercase",
+    regex: lowercaseRegex,
+    element: lowercaseEl,
+  },
+  {
+    name: "uppercase",
+    regex: uppercaseRegex,
+    element: uppercaseEl,
+  },
+  {
+    name: "specialChar",
+    regex: specialCharRegex,
+    element: specialCharEl,
+  },
+  {
+    name: "number",
+    regex: numberRegex,
+    element: numberEl,
+  },
+  {
+    name: "minLength",
+    regex: minLengthRegex,
+    element: minLengthEl,
+  },
+];
+
+function testRegex() {
+  regexArray.forEach((regex) => {
+    let test = regex.regex.test(passwordInput.value);
+
+    if (test) {
+      regex.element.classList.add("valid");
+      regex.element.classList.remove("invalid");
+    } else {
+      regex.element.classList.remove("valid");
+      regex.element.classList.add("invalid");
+    }
+  });
+}
+
+// Add oninput event listener to the password input field
+passwordInput.addEventListener("input", function () {
+  //   validatePassword(this);
+  testRegex();
+});
+
 async function addDataToDatabase(e) {
   e.preventDefault();
   const firstName = formData.firstName.value;
@@ -28,10 +97,16 @@ async function addDataToDatabase(e) {
   const email = formData.email.value;
   const phone = formData.phone.value;
   const password = formData.password.value;
-  // const profileImage = formData['profile-image'].files[0]; // Get the uploaded file
+  
 
+  if (!passwordRegex.test(password)) {
+    errorPass.textContent = 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.';
+    errorPass.style.color = 'red';
+
+    console.log("Password does not meet requirements");
+    return;
+  }
   try {
-    // Create user in auth
     const userCredentials = await createUserWithEmailAndPassword(
       auth,
       email,

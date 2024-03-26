@@ -13,9 +13,32 @@
 body {
   
   background-color: #011b33;
- 
   height: 100vh;
   margin: 0;
+}
+
+.logo-container{
+  margin: 30px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 500 !important;
+  color: #fff !important;
+  font-size: 30px !important;
+  background: black;
+  border-radius: 5px;
+  padding: 20px 25px !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: 0.5s;
+  text-decoration: none;
+
+}
+
+.logo:hover {
+  background: #011b33;
 }
 
 .auth-container {
@@ -38,7 +61,7 @@ body {
 .auth-container h2 {
   text-align: center;
   margin-bottom: 20px;
-  font-size: 15PX;
+  font-size: 17PX;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
 }
@@ -51,8 +74,8 @@ body {
   display: block;
   margin-bottom: 5px;
   font-family: "Roboto", sans-serif;
-  font-size: 17px;
-  font-weight: 300;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .input-group input {
@@ -67,11 +90,12 @@ body {
 
 .eye-icon {
   position: absolute;
-  top: 50%;
-  left: 10.4rem;
+  top: 70%;
+  left: 20.4rem;
   transform: translateY(-50%);
   cursor: pointer;
   color: black;
+  font-size: 15px;
 }
 
 button {
@@ -100,4 +124,18 @@ button:hover {
 
 .links a:hover {
   text-decoration: underline;
+}
+.regex-items{
+  display: none;
+}
+#password:focus ~ .regex-items{
+  display: block !important;
+}
+
+.invalid {
+  color: gray;
+  /* border-color: red; */
+}
+.valid {
+  color: green;
 }

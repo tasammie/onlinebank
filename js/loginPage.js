@@ -31,7 +31,7 @@ async function toLogin(e) {
     e.preventDefault();
     const email = formData.email.value;
     const password = formData.password.value;
-    console.log(email, password);
+    // console.log(email, password);
     
    
     const spinner = document.getElementById('spinner');
@@ -68,6 +68,8 @@ async function toLogin(e) {
 }
 
 toLogInUser.addEventListener('submit', toLogin);
+
+
 
 togglePasswordEye.addEventListener('click', togglePasswordVisibility)
 
